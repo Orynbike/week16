@@ -462,25 +462,27 @@ makeSixteen();
 const errorMessage = document.getElementById('errorMessage');
 
 formOne.addEventListener('submit', function (event) {
-  event.preventDefault(); // Отмена отправки
+    event.preventDefault(); // Отмена отправки формы
 
-  // Получаем доступ к каждому полю формы
-  const inputField1 = formOne.elements['firstName']; // Замените 'inputName1' на имя вашего первого поля ввода
-  const inputField2 = formOne.elements['firstEmail']; // Замените 'inputName2' на имя вашего второго поля ввода
-  // Добавьте переменные для каждого поля формы
+    let isValid = true; // Флаг, указывающий, что форма валидна
 
-  // Используем условные операторы для проверки каждого поля на заполненность
-  if (inputField1.value.trim() === '') {
-    // Если первое поле не заполнено, выводим сообщение об ошибке
-    errorMessage.textContent = 'Пожалуйста, заполните все поля формы.';
-  } else if (inputField2.value.trim() === '') {
-    // Если второе поле не заполнено, выводим сообщение об ошибке
-    errorMessage.textContent = 'Пожалуйста, заполните все поля формы.';
-  } else {
-    // Если все поля заполнены, отправляем форму
-    errorMessage.textContent = ''; // Очищаем сообщение об ошибке
-    formOne.submit();
-  }
+    // Перебираем все элементы формы
+    for (const element of formOne.elements) {
+        // Проверяем, является ли элемент полем ввода и не является ли кнопкой submit
+        if (element.tagName === 'INPUT' && element.type !== 'submit') {
+            // Проверяем, что поле не пустое
+            if (element.value.trim() === '') {
+                errorMessage.textContent = 'Пожалуйста, заполните все поля формы.';
+                isValid = false;
+                break; // Прерываем цикл при первой же ошибке
+            }
+        }
+    }
+
+    if (isValid) {
+        errorMessage.textContent = ''; // Очищаем сообщение об ошибке
+        formOne.submit(); // Отправляем форму
+    }
 });*/
 
 
@@ -571,20 +573,21 @@ emailInput.oninput = function () {
 //При отправке второй формы выполняется проверка всех чекбоксов. Если ни один из чекбоксов не выбран, отмените отправку формы и выведите сообщение об ошибке в элементе с id "result21".
 
 document.querySelector('.b-21').onclick = function (event) {
-	const checkboxes = document.forms.formTwo.querySelectorAll('input[type="checkbox"]');
-	let isChecked = false;
+    const checkboxes = document.forms.formTwo.querySelectorAll('input[type="checkbox"]');
+    let isChecked = false;
 
-	checkboxes.forEach(function (checkbox) {
-		if (checkbox.checked) {
-			isChecked = true;
-		}
-	});
+    checkboxes.forEach(function (checkbox) {
+        if (checkbox.checked) {
+            isChecked = true;
+        }
+    });
 
-	if (!isChecked) {
-		//Ваш код
-	} else {
-		document.getElementById('result21').textContent = 'Проверка пройдена';
-	}
+    if (!isChecked) {
+        event.preventDefault(); // Отменяем отправку формы
+        document.getElementById('result21').textContent = 'Ошибка: Выберите хотя бы один чекбокс';
+    } else {
+        document.getElementById('result21').textContent = 'Проверка пройдена';
+    }
 };
 
 //Задание 22

@@ -636,6 +636,16 @@ document.querySelector('.b-24').onclick = function () {
 	input.setAttribute('placeholder', 'Введите данные');
 };
 
+document.querySelector('.b-24').onclick = function () {
+    // Находим все поля ввода на странице
+    const inputFields = document.querySelectorAll('input');
+
+    // Проходим по каждому полю ввода и устанавливаем атрибут "placeholder"
+    inputFields.forEach(function (input) {
+        input.setAttribute('placeholder', 'Введите данные');
+    });
+};
+
 //Задание 25
 //При фокусе на любом поле ввода измените его границу на цвет "#00ff00". При потере фокуса восстановите стандартную границу.
 

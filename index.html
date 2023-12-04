@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
         }
 
@@ -20,24 +21,21 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
         }
 
         .form-group {
             margin-bottom: 15px;
         }
 
-        label {
+        .form-label {
             display: block;
             margin-bottom: 5px;
         }
 
-        input,
-        select {
+        .form-input {
             width: 100%;
             padding: 8px;
             box-sizing: border-box;
-            margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -48,135 +46,210 @@
 
         .error-message {
             color: #ff0000;
-            font-size: 12px;
+            font-size: 14px;
         }
 
-        button {
+        .submit-btn {
             background-color: #4caf50;
             color: #fff;
-            padding: 10px;
+            padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
         }
 
-        button:hover {
+        .submit-btn:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <form id="registration-form" novalidate>
+    <form id="registrationForm" novalidate>
+        <!-- Ваши поля формы здесь -->
+
         <div class="form-group">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="Введите ваше имя" required minlength="2" maxlength="20">
+            <label for="name" class="form-label">Имя:</label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                placeholder="Введите ваше имя"
+                required
+                minlength="2"
+                maxlength="20"
+                pattern="[A-Za-zА-Яа-яЁё\s]+"
+            />
             <span class="error-message" id="name-error"></span>
         </div>
 
         <div class="form-group">
-            <label for="email">Электронная почта:</label>
-            <input type="email" id="email" name="email" class="form-input" placeholder="Введите вашу почту" required>
+            <label for="email" class="form-label">Email:</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="Введите ваш email"
+                required
+            />
             <span class="error-message" id="email-error"></span>
         </div>
 
         <div class="form-group">
-            <label for="age">Возраст:</label>
-            <input type="number" id="age" name="age" class="form-input" placeholder="Введите ваш возраст" required>
+            <label for="age" class="form-label">Возраст:</label>
+            <input
+                type="number"
+                id="age"
+                name="age"
+                class="form-input"
+                placeholder="Введите ваш возраст"
+                required
+            />
             <span class="error-message" id="age-error"></span>
         </div>
 
         <div class="form-group">
-            <label>Пол:</label>
-            <input type="radio" id="male" name="gender" value="male" required>
-            <label for="male">Мужчина</label>
-            <input type="radio" id="female" name="gender" value="female" required>
-            <label for="female">Женщина</label>
+            <label class="form-label">Пол:</label>
+            <label><input type="radio" name="gender" value="male"> Мужчина</label>
+            <label><input type="radio" name="gender" value="female"> Женщина</label>
         </div>
 
         <div class="form-group">
-            <label for="occupation">Профессия:</label>
-            <select id="occupation" name="occupation" class="form-input" required>
+            <label for="profession" class="form-label">Профессия:</label>
+            <select
+                id="profession"
+                name="profession"
+                class="form-input"
+                required
+            >
                 <option value="" disabled selected>Выберите профессию</option>
                 <option value="doctor">Врач</option>
                 <option value="programmer">Программист</option>
                 <option value="teacher">Учитель</option>
                 <option value="designer">Дизайнер</option>
                 <option value="engineer">Инженер</option>
-                <option value="sales">Продавец</option>
+                <option value="salesperson">Продавец</option>
                 <option value="other">Другое</option>
             </select>
-            <span class="error-message" id="occupation-error"></span>
+            <span class="error-message" id="profession-error"></span>
         </div>
 
         <div class="form-group">
-            <label for="password">Пароль:</label>
-            <input type="password" id="password" name="password" class="form-input" placeholder="Введите пароль" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$">
+            <label for="password" class="form-label">Пароль:</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-input"
+                placeholder="Введите пароль"
+                required
+                minlength="8"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+            />
             <span class="error-message" id="password-error"></span>
         </div>
 
         <div class="form-group">
-            <label for="confirm-password">Повторите пароль:</label>
-            <input type="password" id="confirm-password" name="confirm-password" class="form-input" placeholder="Повторите пароль" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$">
-            <span class="error-message" id="confirm-password-error"></span>
+            <label for="confirmPassword" class="form-label">Повторите пароль:</label>
+            <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                class="form-input"
+                placeholder="Повторите пароль"
+                required
+                minlength="8"
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+            />
+            <span class="error-message" id="confirmPassword-error"></span>
         </div>
 
         <div class="form-group">
-            <input type="checkbox" id="consent" name="consent" required>
-            <label for="consent">Согласие на обработку данных</label>
-            <span class="error-message" id="consent-error"></span>
+            <label>
+                <input
+                    type="checkbox"
+                    id="agreeCheckbox"
+                    name="agreeCheckbox"
+                    required
+                />
+                Согласие на обработку данных
+            </label>
+            <span class="error-message" id="agreeCheckbox-error"></span>
         </div>
 
-        <button type="submit">Зарегистрироваться</button>
+        <button type="submit" class="submit-btn">Отправить</button>
     </form>
 
     <script>
-        document.getElementById('registration-form').addEventListener('submit', function(event) {
-            event.preventDefault();
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Отменяем действие по умолчанию
 
-            clearErrors();
+            // Функция для проверки валидности поля и отображения сообщения об ошибке
+            function validateField(fieldId, errorId) {
+                const field = document.getElementById(fieldId);
+                const error = document.getElementById(errorId);
 
-            validateField('name', /^[a-zA-Z\s]{2,20}$/);
+                if (!field.checkValidity()) {
+                    field.classList.add('error');
+                    error.textContent = field.validationMessage;
+                    return false;
+                } else {
+                    field.classList.remove('error');
+                    error.textContent = '';
+                    return true;
+                }
+            }
 
-            validateField('email', /^\S+@\S+\.\S+$/);
+            // Очищаем сообщения об ошибках и удаляем классы ошибок
+            function clearErrors() {
+                const errorElements = document.querySelectorAll('.error-message');
+                const inputElements = document.querySelectorAll('.form-input');
 
-            validateField('age', /^\d+$/);
+                errorElements.forEach(function (error) {
+                    error.textContent = '';
+                });
 
-            validateSelect('occupation');
+                inputElements.forEach(function (input) {
+                    input.classList.remove('error');
+                });
+            }
 
-            validateField('password', /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/);
+            // Проверка валидности полей
+            const isNameValid = validateField('name', 'name-error');
+            const isEmailValid = validateField('email', 'email-error');
+            const isAgeValid = validateField('age', 'age-error');
+            const isProfessionValid = validateField('profession', 'profession-error');
+            const isPasswordValid = validateField('password', 'password-error');
+            const isConfirmPasswordValid = validateField('confirmPassword', 'confirmPassword-error');
 
-            validateConfirmPassword('password', 'confirm-password');
+            // Проверка согласия с обработкой данных
+            const agreeCheckbox = document.getElementById('agreeCheckbox');
+            const agreeCheckboxError = document.getElementById('agreeCheckbox-error');
 
-            validateCheckbox('consent');
+            if (!agreeCheckbox.checked) {
+                agreeCheckboxError.textContent = 'Пожалуйста, подтвердите согласие на обработку данных.';
+                agreeCheckbox.classList.add('error');
+            } else {
+                agreeCheckboxError.textContent = '';
+                agreeCheckbox.classList.remove('error');
+            }
 
-            if (!document.querySelectorAll('.error').length) {
-                logFormValues();
+            // Если все поля прошли валидацию, выводим значения в консоль и очищаем форму
+            if (isNameValid && isEmailValid && isAgeValid && isProfessionValid && isPasswordValid && isConfirmPasswordValid && agreeCheckbox.checked) {
+                console.log('Имя:', document.getElementById('name').value);
+                console.log('Email:', document.getElementById('email').value);
+                console.log('Возраст:', document.getElementById('age').value);
+                console.log('Пол:', document.querySelector('input[name="gender"]:checked').value);
+                console.log('Профессия:', document.getElementById('profession').value);
+                console.log('Пароль:', document.getElementById('password').value);
+                console.log('Согласие на обработку данных: Да');
 
-                document.getElementById('registration-form').reset();
+                // Очищаем форму
+                document.getElementById('registrationForm').reset();
+                clearErrors();
             }
         });
-
-        function validateField(fieldId, pattern) {
-            const field = document.getElementById(fieldId);
-            const errorSpan = document.getElementById(`${fieldId}-error`);
-
-            if (!field.value.match(pattern)) {
-                field.classList.add('error');
-                errorSpan.textContent = field.validationMessage;
-            }
-        }
-
-        function validateSelect(selectId) {
-            const select = document.getElementById(selectId);
-            const errorSpan = document.getElementById(`${selectId}-error`);
-
-            if (select.value === "") {
-                select.classList.add('error');
-                errorSpan.textContent = 'Выберите профессию';
-            }
-        }
-
-        function validateConfirmPassword(passwordId, confirmPasswordId) {
-            const password = document.getElementById(passwordId);
-            const confirmPassword = document.getElementById(confirmPasswordId)
-        }
+    </script>
+</body>
+</html>

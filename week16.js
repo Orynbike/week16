@@ -368,10 +368,30 @@ document.querySelector('.b-13').addEventListener('click', checkButton);
 //- Если выбран второй вариант, выведите сообщение "Выбран второй вариант" на страницу
 //- Если выбран третий вариант, выведите сообщение "Выбран третий вариант" на страницу
 
+document.querySelector('.b-14').onclick = checkOption;
+
 const paragraphFourteen = document.getElementById('practicum14');
 
 function checkOption() {
-	//Ваш код
+	const form = document.forms[0]; // Может потребоваться уточнение, если у вас несколько форм
+
+    // Получаем доступ к элементу select внутри формы
+    const select = form.elements.firstSelect; 
+
+    // Устанавливаем выбранным второй вариант (индекс 1)
+    select.selectedIndex = 1;
+
+    // Получаем значение выбранной опции
+    const selectedOption = select.value;
+
+    // Используем условный оператор для проверки выбранного варианта и выводим сообщение на страницу
+    if (selectedOption === 'value1') {
+        paragraphFourteen.textContent = "Выбран первый вариант";
+    } else if (selectedOption === 'value2') {
+        paragraphFourteen.textContent = "Выбран второй вариант";
+    } else if (selectedOption === 'value3') {
+        paragraphFourteen.textContent = "Выбран третий вариант";
+    }
 }
 
 document.querySelector('.b-14').onclick = checkOption;
